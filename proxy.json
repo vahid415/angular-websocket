@@ -1,0 +1,7 @@
+{
+  "/socket.io/*": {
+    "target": "http://localhost:4444",
+    "ws": true,
+    "logLevel": "debug"
+  }
+}
