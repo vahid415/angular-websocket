@@ -2,44 +2,42 @@
 {
   "data": [
     {
-      "id": "1",
+      "id": 1,
       "int": 42,
       "float": 3.14159,
-      "color": "#FF0000",
+      "color": "red",
       "child": {
-        "id": "1.1",
-        "color": "#00FF00"
+        "id": 1.1,
+        "color": "green"
       }
     },
     {
-      "id": "1",
-      "int": 42,
+      "id": 2,
+      "int": 33,
       "float": 3.14159,
       "color": "yellow",
       "child": {
-        "id": "1.1",
+        "id": 2.1,
         "color": "blue"
       }
-    }
-  ],
-  "post": [
+    },
     {
-      "id": "1",
-      "int": 42,
+      "id": 3,
+      "int": 57,
       "float": 3.14159,
       "color": "#FF0000",
       "child": {
-        "id": "1.1",
+        "id": 3.1,
         "color": "#00FF00"
       }
     },
     {
-      "id": "1",
-      "int": 42,
+      "id": 4,
+      "int": 64,
       "float": 3.14159,
-      "color": "yellow",
+      "color": "gray",
       "child": {
-        "id": "1.1",
+        "id": 4.1,
         "color": "blue"
       }
     }

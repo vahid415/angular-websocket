@@ -1,8 +1,9 @@
 const app = require('express')();
+const db = require('./db.json');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-const documents = {};
+const documents = db.data;
 
 io.on('connection', socket => {
     let previousId;
@@ -16,21 +17,9 @@ io.on('connection', socket => {
         safeJoin(docId);
         socket.emit('document', documents[docId]);
     });
-    
 
-    socket.on('addDoc', doc => {
-        documents[doc.id] = doc;
-        safeJoin(doc.id);
-        io.emit('documents', Object.keys(documents));
-        socket.emit('document', doc);
-    });
 
-    socket.on('editDoc', doc => {
-        documents[doc.id] = doc;
-        socket.to(doc.id).emit('document', doc);
-    });
-
-    io.emit('documents', Object.keys(documents));
+    io.emit('list', documents);
 
     console.log(`Socket ${socket.id} has connected`);
 });
