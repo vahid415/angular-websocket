@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataModel } from '../models/data-models';
+import { Component } from '@angular/core';
 
 import { DataStreamService } from '../services/data-stream.service';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -10,13 +8,12 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
-  readonly list$ = this.documentService.list$;
-  readonly loading$ = this.documentService.loading$;
+  readonly list$ = this.service.list$;
+  readonly loading$ = this.service.loading$;
 
-  constructor(private documentService: DataStreamService) {
-  }
+  constructor(private service: DataStreamService) {}
 
-  loadDoc(id: string) {
-    this.documentService.getDocument(id);
+  getItem(id: string) {
+    this.service.findById(id);
   }
 }

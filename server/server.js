@@ -3,7 +3,7 @@ const db = require('./db.json');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-const documents = db.data;
+const dataList = db.data;
 
 io.on('connection', socket => {
     let previousId;
@@ -13,13 +13,13 @@ io.on('connection', socket => {
         previousId = currentId;
     }
 
-    socket.on('getDoc', docId => {
-        safeJoin(docId);
-        socket.emit('document', documents[docId]);
+    socket.on('getItem', id => {
+        safeJoin(id);
+        socket.emit('list', dataList.find(item => item.id ===id));
     });
 
 
-    io.emit('list', documents);
+    io.emit('list', dataList);
 
     console.log(`Socket ${socket.id} has connected`);
 });
