@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "run server": "node server/server.js",
-    "watch": "json-server --watch ./server/db.json --port 3000",
     "test": "ng test"
   },
   "private": true,

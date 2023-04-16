@@ -7,10 +7,7 @@ describe('ChildTableComponent', () => {
   let fixture: ComponentFixture<ChildTableComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ChildTableComponent ]
-    })
-    .compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(ChildTableComponent);
     component = fixture.componentInstance;
