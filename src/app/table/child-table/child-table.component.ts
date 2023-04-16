@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-child-table',
   templateUrl: './child-table.component.html',
   styleUrls: ['./child-table.component.scss'],
-  standalone:true
+  standalone:true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChildTableComponent {
   @Input()

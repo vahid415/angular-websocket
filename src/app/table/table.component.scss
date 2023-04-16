@@ -1,0 +1,46 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  .page-change {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  & > * {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

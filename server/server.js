@@ -18,6 +18,10 @@ io.on('connection', socket => {
         socket.emit('list', dataList.find(item => item.id ===id));
     });
 
+    socket.on('list', () => {
+      io.emit('list', dataList);
+    });
+
 
     io.emit('list', dataList);
 

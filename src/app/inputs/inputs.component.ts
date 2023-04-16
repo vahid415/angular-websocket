@@ -1,46 +1,38 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { DataModel } from '../models/data-models';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { DataStreamService } from '../services/data-stream.service';
 
 @Component({
   selector: 'app-inputs',
   templateUrl: './inputs.component.html',
   styleUrls: ['./inputs.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputsComponent implements OnInit, OnDestroy {
-  dataSize: number = 100;
-  timerInterval: number = 1000; // default timer interval in ms
-  dataLength: number = 10; // default data length
-  data: DataModel[] = [];
-  private dataSubscription: Subscription = new Subscription();
+export class InputsComponent implements OnInit {
+  timerInterval: FormControl = new FormControl(0);
+  pageSize: FormControl = new FormControl(10);
 
-  constructor() {}
+  constructor(private service: DataStreamService) {}
 
   ngOnInit(): void {
-    const worker = new Worker('./worker', { type: 'module' });
-    worker.onmessage = ({ data }) => {
-      // Limit data size to 10
-      this.data = [...data.slice(-10)];
-    };
-    worker.postMessage('start');
-    this.getData();
-  }
+    this.timerInterval.valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(500),
+        map((num) => Number(num)),
+        tap((interval) => this.service.setTimer(interval))
+      )
+      .subscribe();
 
-  getData(): void {}
-
-  onIntervalChange(): void {
-    this.getData();
-  }
-
-  restartSocket() {
-    console.log('0');
-
-    // restart the socket with the new data size
-  }
-
-  ngOnDestroy() {
-    if (this.dataSubscription) {
-      this.dataSubscription.unsubscribe();
-    }
+    this.pageSize.valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        map((num) => Number(num)),
+        tap((pageSize) => this.service.setPageSize(pageSize))
+      )
+      .subscribe();
   }
 }

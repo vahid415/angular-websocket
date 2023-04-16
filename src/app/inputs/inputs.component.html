@@ -1,15 +1,32 @@
-<div class="flex flex-row p-4 border-solid border-b-2 border-slate-500 mx-0 text-center">
-    <div class="basis-1/4">
-        <p>Timer, ms</p>
-        <input type="number" min="0" class="text-center" placeholder="Interval (ms)" [(ngModel)]="timerInterval" (change)="onIntervalChange()">
-    </div>
-    <div class="basis-1/4">
-        <p>Array size</p>
-        <input type="number" min="0" class="text-center" placeholder="Data size"  [(ngModel)]="dataSize" (ngModelChange)="restartSocket()">
-    </div>
+<div
+  class="flex flex-row p-4 border-solid border-b-2 border-slate-500 mx-0 text-center"
+>
+  <div class="basis-1/4">
+    <p>Timer, ms</p>
+    <input
+      type="number"
+      min="0"
+      class="text-center"
+      placeholder="Interval (ms)"
+      [formControl]="timerInterval"
+    />
+  </div>
+  <div class="basis-1/4">
+    <p>Array size</p>
+    <select name="page-size" [value]="10"  [formControl]="pageSize">
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+  </div>
 
-    <div class="basis-1/2">
-        <p>Additional array ids</p>
-        <input type="number" min="0" class="w-9/12 text-center" placeholder="Additional array ids">
-    </div>
+  <div class="basis-1/2">
+    <p>Additional array ids</p>
+    <input
+      type="number"
+      min="0"
+      class="w-9/12 text-center"
+      placeholder="Additional array ids"
+    />
+  </div>
 </div>
