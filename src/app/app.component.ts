@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { InputsComponent } from './inputs/inputs.component';
 
 @Component({
   selector: 'app-root',

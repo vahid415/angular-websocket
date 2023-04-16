@@ -9,11 +9,13 @@
       class="text-center"
       placeholder="Interval (ms)"
       [formControl]="timerInterval"
+      (ngModelChange)="startInterval()"
+      [(ngModel)]="timeInMillis" 
     />
   </div>
   <div class="basis-1/4">
     <p>Array size</p>
-    <select name="page-size" [value]="10"  [formControl]="pageSize">
+    <select name="page-size" class="w-full text-center" [value]="10"  [formControl]="pageSize">
       <option value="10">10</option>
       <option value="20">20</option>
       <option value="50">50</option>
