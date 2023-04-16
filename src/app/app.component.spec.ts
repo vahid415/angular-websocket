@@ -38,6 +38,7 @@ describe('AppComponent', () => {
 
   it('should render table', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.table-inputs')).toBeTruthy();
+    expect(compiled.querySelector('.table-header')).toBeTruthy();
+    expect(compiled.querySelector('.table-content')).toBeTruthy();
   });
 });
