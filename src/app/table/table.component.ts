@@ -21,12 +21,4 @@ export class TableComponent {
   getItem(id: string) {
     this.service.findById(id);
   }
-
-  getNextPage() {
-    this.service.getNextPage();
-  }
-
-  getPrevPage() {
-    this.service.getPrevPage();
-  }
 }

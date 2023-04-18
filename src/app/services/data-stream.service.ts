@@ -1,6 +1,6 @@
 import { Socket } from 'ngx-socket-io';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, interval, map } from 'rxjs';
 
 import { DataModel } from '../models/data-models';
 
@@ -17,45 +17,43 @@ export class DataStreamService {
   readonly pageSize$$: Observable<number> = this.timer$.asObservable();
 
   readonly list$ = new BehaviorSubject<DataModel[]>([]);
-  private readonly list$$: Subscription= this.socket
+  private interval$: Subscription | undefined;
+  private readonly list$$: Subscription = this.socket
     .fromEvent<DataModel[]>('list')
     .pipe(
       map((serverData) => {
-        const start = (this.pageNumber + 1) * 10;
+        const start = this.pageNumber * 10;
         const end = Math.min(start + this.pageSize$.value, serverData.length);
-        this.list$.next(serverData.slice(start, end));
+        const list = serverData.slice(start, end);
+        if (list.length) {
+          this.list$.next(list);
+        } else {
+          this.clearInterval();
+        }
         this.pageNumber = this.pageNumber + 1;
-        return this.list$;
       })
-    ).subscribe();
+    )
+    .subscribe();
   constructor(private socket: Socket) {}
 
   findById(id: string) {
     this.socket.emit('getDoc', id);
   }
 
-  setTimer(time: number) {
-    this.pageNumber = 0;
-     this.timer$.next(time);
-     this.socket.emit('list');
-  }
-
   setPageSize(size: number) {
     this.pageNumber = 0;
     this.pageSize$.next(size);
     this.socket.emit('list');
- }
-
-
-  getNextPage() {
-    this.loading$.next(true);
-    setTimeout(() => {
-      this.socket.emit('list');
-      this.loading$.next(false);
-    }, this.timer$.value);
   }
 
-  getPrevPage() {
-    this.socket.emit('prev');
+  clearInterval() {
+    this.pageNumber = 0;
+    this.interval$?.unsubscribe();
+  }
+  getList(timeInterval: number) {
+    this.loading$.next(true);
+    this.interval$ = interval(timeInterval)
+      .pipe(map(() => this.socket.emit('list')))
+      .subscribe(() => this.loading$.next(false));
   }
 }
