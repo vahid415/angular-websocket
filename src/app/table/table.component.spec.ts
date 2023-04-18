@@ -1,7 +1,8 @@
+import {of} from "rxjs";
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
-import { TableComponent } from './table.component';
-import { DataStreamService } from '../services/data-stream.service';
+import {TableComponent} from './table.component';
+import {DataStreamService} from '../services/data-stream.service';
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -12,7 +13,7 @@ describe('TableComponent', () => {
       providers: [
         {
           provide: DataStreamService,
-          useValue: {},
+          useValue: {list$$: jest.fn(() => of([])), loading$: jest.fn(() => of(false))},
         },
       ],
     }).compileComponents();
