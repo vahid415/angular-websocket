@@ -1,6 +1,6 @@
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, map, switchMap, take, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { DataStreamService } from '../services/data-stream.service';
 
 @Component({
@@ -14,7 +14,6 @@ import { DataStreamService } from '../services/data-stream.service';
 export class InputsComponent implements OnInit {
   timerInterval: FormControl = new FormControl(0);
   pageSize: FormControl = new FormControl(10);
-  timeInMillis: number = 0;
 
   constructor(private service: DataStreamService) {}
 
@@ -25,7 +24,7 @@ export class InputsComponent implements OnInit {
         distinctUntilChanged(),
         debounceTime(1000),
         map((num) => Number(num)),
-        tap(()=> this.service.clearInterval()),
+        switchMap(()=> this.service.clearInterval()),
         tap(() => this.service.getList(this.timerInterval.value))
       )
       .subscribe();

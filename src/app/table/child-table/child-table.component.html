@@ -1,22 +1,19 @@
 <div class="border-solid border-2 border-slate-500 m-1">
   <table class="w-full">
     <thead>
-      <tr>
-        <th class="w-1/2">id</th>
-        <th class="w-1/2">color</th>
-      </tr>
+    <tr>
+      <th class="w-1/2">id</th>
+      <th class="w-1/2">color</th>
+    </tr>
     </thead>
     <tbody>
-      <tr class="text-center">
-        <td>{{ data?.id }}</td>
-        <td>
-          <span
-            [style.background-color]="data?.color"
-            class="bg-clip-content"
-            >{{ data?.color }}</span
-          >
-        </td>
-      </tr>
+    <tr class="text-center">
+      <td data-testid="id-col">{{ data?.id }}</td>
+      <td>
+        <span data-testid="color-col" class="bg-clip-content"
+              [style.background-color]="data?.color">{{ data?.color }}</span>
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>

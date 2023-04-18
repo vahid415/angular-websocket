@@ -1,32 +1,28 @@
 <div class="m-4">
-  <div *ngIf="loading$ | async" class="loading"></div>
+  <div data-testid="loading" *ngIf="loading$$ | async" class="loading"></div>
   <table class="w-full">
     <thead>
-      <tr>
-        <th class="w-40">id</th>
-        <th>int</th>
-        <th>float</th>
-        <th>color</th>
-        <th>child</th>
-      </tr>
+    <tr>
+      <th class="w-40">id</th>
+      <th>int</th>
+      <th>float</th>
+      <th>color</th>
+      <th>child</th>
+    </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="let item of list$ | async"
-        class="text-center pt-2.5 border-solid border-2 border-slate-500"
-      >
-        <td>{{ item.id }}</td>
-        <td>{{ item.int }}</td>
-        <td>{{ item.float }}</td>
-        <td>
-          <span [style.background-color]="item.color" class="bg-clip-content">{{
-            item.color
-          }}</span>
-        </td>
-        <td>
-          <app-child-table [data]="item.child"></app-child-table>
-        </td>
-      </tr>
+    <tr data-testid="table-body" class="text-center pt-2.5 border-solid border-2 border-slate-500"
+        *ngFor="let item of list$ | async">
+      <td>{{ item.id }}</td>
+      <td>{{ item.int }}</td>
+      <td>{{ item.float }}</td>
+      <td>
+        <span [style.background-color]="item.color" class="child-ng-color bg-clip-content">{{item.color}}</span>
+      </td>
+      <td>
+        <app-child-table [data]="item.child"></app-child-table>
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>

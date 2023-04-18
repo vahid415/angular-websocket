@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TableComponent {
   readonly list$ = this.service.list$;
-  readonly loading$ = this.service.loading$$;
+  readonly loading$$ = this.service.loading$$;
 
   constructor(private service: DataStreamService) {}
 
