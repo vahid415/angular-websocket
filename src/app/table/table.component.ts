@@ -17,8 +17,4 @@ export class TableComponent {
   readonly loading$$ = this.service.loading$$;
 
   constructor(private service: DataStreamService) {}
-
-  getItem(id: string) {
-    this.service.findById(id);
-  }
 }

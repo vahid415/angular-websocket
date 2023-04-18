@@ -36,10 +36,6 @@ export class DataStreamService {
       .subscribe();
   }
 
-  findById(id: string) {
-    this.socket.emit('getDoc', id);
-  }
-
   setPageSize(size: number) {
     this.pageNumber = 0;
     this.pageSize$.next(size);

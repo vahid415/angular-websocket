@@ -20,7 +20,7 @@
         <span [style.background-color]="item.color" class="child-ng-color bg-clip-content">{{item.color}}</span>
       </td>
       <td>
-        <app-child-table [data]="item.child"></app-child-table>
+        <app-child-table data-testid="child-item" [data]="item.child"></app-child-table>
       </td>
     </tr>
     </tbody>

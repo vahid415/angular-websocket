@@ -52,4 +52,9 @@ describe('TableComponent', () => {
     const table = testHelper.findEl(fixture, 'table-body');
     expect(table.nativeElement.firstChild.textContent).toBe(MockedData[0].id);
   })
+
+  it('should test datatable child component', () => {
+    const childTable = testHelper.findEl(fixture, 'child-item');
+    expect(childTable.nativeElement).toBeTruthy();
+  })
 });

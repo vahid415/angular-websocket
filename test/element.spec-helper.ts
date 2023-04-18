@@ -22,6 +22,10 @@ export function expectLayoutContent<T>(
 }
 
 export function findEls<T>(fixture: ComponentFixture<T>, testId: string) {
+  return fixture.debugElement.queryAll(By.css(testId));
+}
+
+export function findElsByTestID<T>(fixture: ComponentFixture<T>, testId: string) {
   return fixture.debugElement.queryAll(By.css(getSelector(testId)));
 }
 

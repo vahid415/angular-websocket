@@ -12,7 +12,7 @@ import { DataStreamService } from '../services/data-stream.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputsComponent implements OnInit {
-  timerInterval: FormControl = new FormControl(0);
+  timerInterval: FormControl = new FormControl(100);
   pageSize: FormControl = new FormControl(10);
 
   constructor(private service: DataStreamService) {}
